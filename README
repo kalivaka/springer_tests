@@ -1,0 +1,9 @@
+## How to run the tests:
+run `bundle`
+run `ruby search.rb`
+
+## EXPLANATION:
+
+I've described majority of test cases in Task 1. Here I just took couple of scenarios and found one minor bug with pagination.
+
+Since search endpoint is complicated, it might take hours and many test cases to cover everything. I'm happy to elaborate more if needed. 
