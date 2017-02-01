@@ -2,19 +2,18 @@ require 'minitest/autorun'
 require 'rest_client'
 
 class APITestSearchScenario < Minitest::Test
-
   def test_search_responds
-    @response = RestClient.get("http://rd.springer.com/search?query=programming") 
+    @response = make_search_request
     assert_equal 200, @response.code
   end
 
   def test_unhappy_path
-    @response = RestClient.get("http://rd.springer.com/search?query=somethingunexisting23ru389h32hrh") 
+    @response = make_search_request "somethingunexisting23ru389h32hrh" 
     assert @response.body.match("we couldn’t find what you are looking for")
   end
 
   def test_happy_path
-    @response = RestClient.get("http://rd.springer.com/search?query=programming") 
+    @response = make_search_request
     assert @response.body.match("Result(s)")
   end
 
@@ -24,4 +23,7 @@ class APITestSearchScenario < Minitest::Test
     assert !@response.body.match("Page -3")
   end
 
+  def make_search_request(query = "programming")
+  	RestClient.get("http://rd.springer.com/search/?query=#{query}") 
+  end
 end
